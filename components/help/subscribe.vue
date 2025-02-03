@@ -52,10 +52,11 @@
             </button>
           </div>
           <p v-if="successMessage" class="mt-4 text-yellow-200 font-medium">
-            {{ successMessage }}
+            {{ successMessage }} de
+            <span class="text-green-300"> l'ieda Relief</span>
           </p>
-          <p v-if="errorMessage" class="mt-4 text-red-200 font-medium">
-            {{ errorMessage }}
+          <p v-if="errorMessage" class="mt-4 text-red-400 font-medium">
+            🫣 {{ errorMessage }}
           </p>
         </form>
       </div>
@@ -86,14 +87,14 @@ const submitSubscription = async () => {
       { name: name.value, last_name: last_name.value, email: email.value },
     ];
     await createItems({ collection: "subscription", items });
-    successMessage.value = "Vous êtes bien inscrit à la newsletter !";
+    successMessage.value = "Vous êtes bien inscrit à la newsletter";
     // Réinitialise les champs
     name.value = "";
     last_name.value = "";
     email.value = "";
   } catch (e) {
     if (e?.data?.errors?.[0]?.extensions?.code === "RECORD_NOT_UNIQUE") {
-      errorMessage.value = "Cet email est déjà enregistré.";
+      errorMessage.value = "Désolé!! Cet email existe déjà dans nos courriers.";
     } else {
       errorMessage.value =
         "Une erreur inattendue est survenue. Veuillez réessayer plus tard.";
