@@ -7,150 +7,156 @@
         <transition-group
           name="fade"
           tag="div"
-          class="flex bg-custom-green text-white overflow-hidden h-80"
-          v-for="article in currentArticles"
-          :key="article.id"
+          class="flex flex-col bg-custom-green text-white overflow-hidden h-80"
         >
-          <!-- Contenu texte  -->
-
-          <div class="p-6 w-2/3">
-            <div
-              class="text-sm font-semibold text-green-50 mb-4 flex items-center space-x-2"
-            >
-              <span class="underline underline-offset-4">
-                {{ article.categorie?.description }}</span
+          <!-- Boucle sur les articles -->
+          <div
+            v-for="article in currentArticles"
+            :key="article.id"
+            class="flex w-full"
+          >
+            <!-- Contenu texte -->
+            <div class="p-6 w-2/3 flex flex-col">
+              <div
+                class="text-sm font-semibold text-green-50 mb-4 flex items-center space-x-2"
               >
-              <span>|</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-4 w-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                />
-              </svg>
-              <span>IEDA Relief</span>
-            </div>
-
-            <!-- Titre de l'article -->
-            <h2
-              class="text-2xl font-bold leading-tight mb-4"
-              data-aos="zoom-in"
-            >
-              {{ article.titre }}
-            </h2>
-
-            <!-- Métadonnées (lieu et date) -->
-            <p
-              class="text-sm mb-4"
-              data-aos="fade-up"
-              data-aos-anchor-placement="top-bottom"
-            >
-              <span class="font-semibold">
-                Publié le {{ formatDate(article.date_created) }}</span
-              >
-              {{ article.resume }}
-            </p>
-
-            <!-- Bouton "Lire plus" -->
-            <button
-              class="text-green-50 font-semibold text-sm flex items-center space-x-1 group"
-              @click="lirePlus(article.slug)"
-            >
-              <span class="relative">
-                Lire plus
-                <span
-                  class="absolute left-0 bottom-0 w-full h-0.5 bg-green-300 transition-all duration-300 group-hover:w-0"
-                ></span>
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-4 w-4 transition-transform duration-300 group-hover:rotate-90"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25"
-                />
-              </svg>
-            </button>
-
-            <!-- Pagination -->
-            <div
-              class="bg-white flex items-center justify-between mt-6 text-sm text-black"
-            >
-              <button
-                :disabled="currentPage === 1"
-                @click="prevPage"
-                class="p-4 font-bold text-sm hover:text-custom-green hover:bg-green-50 w-full text-center flex items-center justify-center"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 mr-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 111.414 1.414L4.414 10l6.293 6.293A1 1 0 0110 18z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                Précédent
-              </button>
-              <div class="p-4 font-bold text-sm">
-                {{ currentPage }}/{{ totalPages }}
-              </div>
-              <button
-                :disabled="currentPage === totalPages"
-                @click="nextPage"
-                class="p-4 font-bold text-sm hover:text-custom-green hover:bg-green-50 w-full text-center flex items-center justify-center"
-              >
-                Suivant
+                <span class="underline underline-offset-4">{{
+                  article.categorie?.description
+                }}</span>
+                <span>|</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="h-5 w-5 ml-2"
+                  class="h-4 w-4"
                 >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                  />
+                </svg>
+                <span>IEDA Relief</span>
+              </div>
+
+              <!-- Titre de l'article -->
+              <h2
+                class="text-2xl font-bold leading-tight mb-4"
+                data-aos="zoom-in"
+              >
+                {{ article.titre }}
+              </h2>
+
+              <!-- Métadonnées (lieu et date) -->
+              <p
+                class="text-sm mb-4"
+                data-aos="fade-up"
+                data-aos-anchor-placement="top-bottom"
+              >
+                <span class="font-semibold"
+                  >Publié le {{ formatDate(article.date_created) }}</span
+                >
+                {{ article.resume }}
+              </p>
+
+              <!-- Bouton "Lire plus" -->
+              <button
+                class="text-green-50 font-semibold text-sm flex items-center space-x-1 group"
+                @click="lirePlus(article.slug)"
+              >
+                <span class="relative">
+                  Lire plus
+                  <span
+                    class="absolute left-0 bottom-0 w-full h-0.5 bg-green-300 transition-all duration-300 group-hover:w-0"
+                  ></span>
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-4 w-4 transition-transform duration-300 group-hover:rotate-90"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25"
                   />
                 </svg>
               </button>
-            </div>
-          </div>
 
-          <!-- Image (droite) -->
-          <div class="relative w-1/3 h-full">
-            <!-- Texte "Actualité" en haut à droite -->
-            <div
-              class="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold py-1 px-3 rounded"
-            >
-              {{ article.categorie?.description }}
+              <!-- Boutons de pagination en dessous du bouton "Lire plus" -->
+              <div
+                class="bg-white flex items-center justify-between mt-6 text-sm text-black w-full"
+                key="pagination"
+              >
+                <button
+                  :disabled="currentPage === 1"
+                  @click="prevPage"
+                  class="p-4 font-bold text-sm hover:text-custom-green hover:bg-green-50 w-full text-center flex items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-2"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 111.414 1.414L4.414 10l6.293 6.293A1 1 0 0110 18z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Précédent
+                </button>
+
+                <div class="p-4 font-bold text-sm">
+                  {{ currentPage }}/{{ totalPages }}
+                </div>
+
+                <button
+                  :disabled="currentPage === totalPages"
+                  @click="nextPage"
+                  class="p-4 font-bold text-sm hover:text-custom-green hover:bg-green-50 w-full text-center flex items-center justify-center"
+                >
+                  Suivant
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-5 w-5 ml-2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
-            <!-- Image -->
-            <img
-              :src="`http://localhost:8055/assets/${article.coverImg}`"
-              alt="Illustration de l'article"
-              class="h-full w-full object-cover"
-            />
+
+            <!-- Image (droite) -->
+            <div class="relative w-1/3 h-full">
+              <div
+                class="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold py-1 px-3 rounded"
+              >
+                {{ article.categorie?.description }}
+              </div>
+              <img
+                :src="`http://localhost:8055/assets/${article.coverImg}`"
+                alt="Illustration de l'article"
+                class="w-full h-80 object-cover"
+              />
+            </div>
           </div>
         </transition-group>
+
         <!-- Fin Actualités -->
       </div>
     </div>
