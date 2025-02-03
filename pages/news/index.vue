@@ -156,7 +156,6 @@
             </div>
           </div>
         </transition-group>
-
         <!-- Fin Actualités -->
       </div>
     </div>
