@@ -94,7 +94,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       directus: {
-        url: "http://localhost:8055",
+        url: "https://admin.iedarelief.org/",
       },
     },
   },
